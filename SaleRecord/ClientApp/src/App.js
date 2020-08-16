@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { Customer } from './components/Customer';
+import 'semantic-ui-css/semantic.min.css'
 
 import './custom.css'
 

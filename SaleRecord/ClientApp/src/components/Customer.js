@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Table, Icon } from 'semantic-ui-react'
+import NewCustomerModal from './NewCustomerModal';
 
 export class Customer extends Component {
   //static displayName = FetchData.name;
@@ -21,7 +22,9 @@ export class Customer extends Component {
     render() {
         return (
             <div>
-                <Button primary>New Customer</Button>
+
+                
+                <NewCustomerModal />
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
