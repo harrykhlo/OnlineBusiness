@@ -20,12 +20,12 @@ namespace SaleRecord.Models
         public virtual DbSet<Sales> Sales { get; set; }
         public virtual DbSet<Store> Store { get; set; }
 
-//        protected override void onconfiguring(dbcontextoptionsbuilder optionsbuilder)
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
-//            if (!optionsbuilder.isconfigured)
+//            if (!optionsBuilder.IsConfigured)
 //            {
-//#warning to protect potentially sensitive information in your connection string, you should move it out of source code. see http://go.microsoft.com/fwlink/?linkid=723263 for guidance on storing connection strings.
-//                optionsbuilder.usesqlserver("server=desktop-2eicup1\\sqlexpress;database=saledatabase;trusted_connection=true;");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Server=DESKTOP-2EICUP1;Database=SaleDatabase;Trusted_Connection=True;");
 //            }
 //        }
 
@@ -33,8 +33,6 @@ namespace SaleRecord.Models
         {
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(255)
@@ -48,8 +46,6 @@ namespace SaleRecord.Models
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(255)
@@ -60,33 +56,29 @@ namespace SaleRecord.Models
 
             modelBuilder.Entity<Sales>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.DateSold).HasColumnType("date");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Sales__CustomerI__3D5E1FD2");
+                    .HasConstraintName("FK__Sales__CustomerI__3E52440B");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Sales__ProductId__3C69FB99");
+                    .HasConstraintName("FK__Sales__ProductId__3D5E1FD2");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.StoreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Sales__StoreId__3E52440B");
+                    .HasConstraintName("FK__Sales__StoreId__3F466844");
             });
 
             modelBuilder.Entity<Store>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(255)

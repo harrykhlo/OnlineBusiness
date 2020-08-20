@@ -3,12 +3,11 @@ import { Button, Table, Icon } from 'semantic-ui-react'
 import NewCustomerModal from './NewCustomerModal';
 
 export class Customer extends Component {
-  //static displayName = FetchData.name;
 
-  constructor(props) {
-    super(props);
-      this.state = { customers: [] };
-  }
+    constructor(props) {
+        super(props);
+        this.state = { customers: [] };
+    }
 
     componentDidMount() {
         fetch('api/customers', { method: 'GET' })
@@ -22,9 +21,7 @@ export class Customer extends Component {
     render() {
         return (
             <div>
-
-                
-                <NewCustomerModal />
+                <NewCustomerModal /> 
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -35,7 +32,7 @@ export class Customer extends Component {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {this.state.customers.map(customer => 
+                        {this.state.customers.map(customer =>
                             <Table.Row key={customer.id}>
                                 <Table.Cell>{customer.name}</Table.Cell>
                                 <Table.Cell>{customer.address}</Table.Cell>

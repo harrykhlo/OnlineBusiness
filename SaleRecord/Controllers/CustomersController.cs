@@ -80,21 +80,7 @@ namespace SaleRecord.Controllers
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
             _context.Customer.Add(customer);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CustomerExists(customer.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
