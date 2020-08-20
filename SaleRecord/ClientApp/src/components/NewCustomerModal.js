@@ -2,8 +2,37 @@ import React from 'react'
 import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
-function NewCustomerModal() {
+function NewCustomerModal(props) {
+    const { updateCustomers } = props;
+
     const [open, setOpen] = React.useState(false)
+    const [name, setFirstName] = React.useState('')
+    const [address, setAddress] = React.useState('')
+
+    const changeFirstNameHandler = (e) => {
+        setFirstName(e.target.value)
+    }
+    const changeAddressHandler = (e) => {
+        setAddress(e.target.value)
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        console.log({ name, address})
+        fetch('api/customers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify({ name, address })
+        })
+            .then(res => res.json())
+            .then(data => {
+                props.updateCustomers();
+                setFirstName('');
+                setAddress('');
+                setOpen(false);
+                return data;
+            });
+    }
 
     return (
         <Modal
@@ -16,20 +45,34 @@ function NewCustomerModal() {
         >
             <Header content='Create customer' />
             <Modal.Content>
-                <Form>
+                <Form onSubmit={submitHandler}>
                     <Form.Field>
                         <label>First Name</label>
-                        <input placeholder='First Name' />
+                        <input
+                            type="text"
+                            name="firstName"
+                            value={name}
+                            placeholder='First Name'
+                            onChange={changeFirstNameHandler}
+                        />
+                        <p>{name}</p>
                     </Form.Field>
                     <Form.Field>
                         <label>Address</label>
-                        <input placeholder='Address' />
+                        <input
+                            type="text"
+                            name="address"  
+                            value={address}
+                            placeholder='Address'
+                            onChange={changeAddressHandler}
+                        />
+                        <p>{address}</p>
                     </Form.Field>    
                      <Button secondary onClick={() => setOpen(false)}>
                             cancel
                      </Button>
-                    <Button type='submit' color='green' onClick={() => setOpen(false)}>
-                            create <Icon name='checkmark' />
+                    <Button type='submit' color='green'>
+                            create   <Icon name='checkmark' />
                     </Button>
                     
                 </Form>

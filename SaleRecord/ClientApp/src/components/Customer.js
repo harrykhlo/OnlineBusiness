@@ -10,10 +10,15 @@ export class Customer extends Component {
     }
 
     componentDidMount() {
+        this.updateCustomers();
+    }
+
+    updateCustomers = () => {
         fetch('api/customers', { method: 'GET' })
             .then(res => res.json())
             .then(data => {
                 this.setState({ customers: data });
+                console.log(data);
                 return data;
             });
     }
@@ -21,7 +26,7 @@ export class Customer extends Component {
     render() {
         return (
             <div>
-                <NewCustomerModal /> 
+                <NewCustomerModal updateCustomers={this.updateCustomers}/> 
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
