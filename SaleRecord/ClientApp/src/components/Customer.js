@@ -3,6 +3,7 @@ import { Button, Table, Icon } from 'semantic-ui-react'
 import NewCustomerModal from './NewCustomerModal';
 import DeleteCustomerModal from './DeleteCustomerModal';
 
+
 export class Customer extends Component {
 
     constructor(props) {
@@ -43,6 +44,7 @@ export class Customer extends Component {
                                 <Table.Cell>{customer.name}</Table.Cell>
                                 <Table.Cell>{customer.address}</Table.Cell>
                                 <Table.Cell>
+
                                     <Button color='yellow'>
                                         <Icon name='edit outline' /> Edit
                                     </Button>

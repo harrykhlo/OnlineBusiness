@@ -26,7 +26,7 @@ function NewCustomerModal(props) {
         })
             .then(res => res.json())
             .then(data => {
-                props.updateCustomers();
+                updateCustomers();
                 setFirstName('');
                 setAddress('');
                 setOpen(false);

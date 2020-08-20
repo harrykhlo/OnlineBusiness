@@ -19,19 +19,16 @@ function DeleteCustomerModal(props) {
     const submitHandler = (e) => {
         e.preventDefault();
         console.log({ updateCustomers, customerId})
-        //fetch('api/customers', {
-        //    method: 'POST',
-        //    headers: { 'Content-Type': 'application/json', },
-        //    body: JSON.stringify({ name, address })
-        //})
-        //    .then(res => res.json())
-        //    .then(data => {
-        //        props.updateCustomers();
-        //        setFirstName('');
-        //        setAddress('');
-        //        setOpen(false);
-        //        return data;
-        //    });
+        fetch(`api/customers/${customerId}`, {
+            method: 'delete'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                updateCustomers();
+                setOpen(false);
+                return data;
+            });
     }
 
     return (
