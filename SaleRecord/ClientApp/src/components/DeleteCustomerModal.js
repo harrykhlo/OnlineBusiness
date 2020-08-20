@@ -55,8 +55,6 @@ function DeleteCustomerModal(props) {
                             cancel
                      </Button>
                      <Button type='submit' color='red' content='delete' icon='remove' labelPosition='right' />
-                    
-                    
                 </Form>
             </Modal.Content>
         </Modal>
