@@ -3,7 +3,7 @@ import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 function DeleteCustomerModal(props) {
-    const { updateCustomers } = props;
+    const { updateCustomers, customerId } = props;
 
     const [open, setOpen] = React.useState(false)
     const [name, setFirstName] = React.useState('')
@@ -18,7 +18,7 @@ function DeleteCustomerModal(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log({ name, address})
+        console.log({ updateCustomers, customerId})
         //fetch('api/customers', {
         //    method: 'POST',
         //    headers: { 'Content-Type': 'application/json', },
@@ -55,6 +55,8 @@ function DeleteCustomerModal(props) {
                             cancel
                      </Button>
                      <Button type='submit' color='red' content='delete' icon='remove' labelPosition='right' />
+                    
+                    
                 </Form>
             </Modal.Content>
         </Modal>

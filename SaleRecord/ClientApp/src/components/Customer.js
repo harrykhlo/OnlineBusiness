@@ -48,7 +48,7 @@ export class Customer extends Component {
                                     </Button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <DeleteCustomerModal updateCustomers={this.updateCustomers} />
+                                    <DeleteCustomerModal updateCustomers={this.updateCustomers} customerId={customer.id}/>
                                 </Table.Cell>
                             </Table.Row>
                         )}
