@@ -55,7 +55,6 @@ function NewCustomerModal(props) {
                             placeholder='First Name'
                             onChange={changeFirstNameHandler}
                         />
-                        <p>{name}</p>
                     </Form.Field>
                     <Form.Field>
                         <label>Address</label>
@@ -66,14 +65,11 @@ function NewCustomerModal(props) {
                             placeholder='Address'
                             onChange={changeAddressHandler}
                         />
-                        <p>{address}</p>
                     </Form.Field>    
                      <Button secondary onClick={() => setOpen(false)}>
                             cancel
                      </Button>
-                    <Button type='submit' color='green'>
-                            create   <Icon name='checkmark' />
-                    </Button>
+                    <Button type='submit' color='green' content='create' icon='checkmark' labelPosition='right' />
                     
                 </Form>
             </Modal.Content>
