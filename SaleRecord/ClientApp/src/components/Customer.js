@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Table, Icon } from 'semantic-ui-react'
 import NewCustomerModal from './NewCustomerModal';
 import DeleteCustomerModal from './DeleteCustomerModal';
-
+import EditCustomerModal from './EditCustomerModal';
 
 export class Customer extends Component {
 
@@ -44,10 +44,7 @@ export class Customer extends Component {
                                 <Table.Cell>{customer.name}</Table.Cell>
                                 <Table.Cell>{customer.address}</Table.Cell>
                                 <Table.Cell>
-
-                                    <Button color='yellow'>
-                                        <Icon name='edit outline' /> Edit
-                                    </Button>
+                                    <EditCustomerModal updateCustomers={this.updateCustomers} customer={customer} />
                                 </Table.Cell>
                                 <Table.Cell>
                                     <DeleteCustomerModal updateCustomers={this.updateCustomers} customerId={customer.id}/>
