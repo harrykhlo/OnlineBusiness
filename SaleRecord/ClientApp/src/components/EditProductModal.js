@@ -2,32 +2,32 @@ import React from 'react'
 import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
-function EditCustomerModal(props) {
-    const { updateCustomers, customer } = props;
+function EditProductModal(props) {
+    const { updateProducts, product } = props;
 
     const [open, setOpen] = React.useState(false)
-    const [name, setFirstName] = React.useState(customer.name)
-    const [address, setAddress] = React.useState(customer.address)
+    const [name, setProductName] = React.useState(product.name)
+    const [price, setPrice] = React.useState(product.price)
 
-    const changeFirstNameHandler = (e) => {
-        setFirstName(e.target.value)
+    const changeProductNameHandler = (e) => {
+        setProductName(e.target.value)
     }
-    const changeAddressHandler = (e) => {
-        setAddress(e.target.value)
+    const changePriceHandler = (e) => {
+        setPrice(parseFloat(e.target.value))
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        const payload = { id: customer.id, name, address }
+        const payload = { id: product.id, name, price }
         //console.log(payload)
-        fetch(`api/customers/${customer.id}`, {
+        fetch(`api/products/${product.id}`, {
             method: 'PUT',
             headers: { 'content-type': 'application/json', },
             body: JSON.stringify(payload)
         })
             .then(res => {
                 console.log(res)
-                updateCustomers();
+                updateProducts();
                 setOpen(false);
                 return res;
             });
@@ -44,27 +44,27 @@ function EditCustomerModal(props) {
             onOpen={() => setOpen(true)}
             style={{ width: '30%', height: 'auto', top: 'auto', bottom: 'auto', left: 'auto', right: 'auto' }}
         >
-            <Header content='Edit customer' />
+            <Header content='Edit product' />
             <Modal.Content>
                 <Form onSubmit={submitHandler}>
                     <Form.Field>
-                        <label>First Name</label>
+                        <label>Product Name</label>
                         <input
                             type="text"
-                            name="firstName"
+                            name="productName"
                             value={name}
-                            placeholder='First Name'
-                            onChange={changeFirstNameHandler}
+                            placeholder='Product Name'
+                            onChange={changeProductNameHandler}
                         />
                     </Form.Field>
                     <Form.Field>
                         <label>Address</label>
                         <input
                             type="text"
-                            name="address"  
-                            value={address}
-                            placeholder='Address'
-                            onChange={changeAddressHandler}
+                            name="price"
+                            value={price}
+                            placeholder='Price'
+                            onChange={changePriceHandler}
                         />
                     </Form.Field>    
                      <Button secondary onClick={() => setOpen(false)}>
@@ -78,4 +78,4 @@ function EditCustomerModal(props) {
     )
 }
 
-export default EditCustomerModal
+export default EditProductModal

@@ -29,8 +29,14 @@ export class NavMenu extends Component {
             <NavbarBrand tag={Link} to="/">SaleRecord</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-              <ul className="navbar-nav flex-grow">
+             <ul className="navbar-nav flex-grow">
                 <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/">Customer</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/product">Product</NavLink>
+                </NavItem>
+                {/*<NavItem>
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
@@ -41,7 +47,7 @@ export class NavMenu extends Component {
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/customer">Customer</NavLink>
-                </NavItem>
+                </NavItem>*/}
               </ul>
             </Collapse>
           </Container>
