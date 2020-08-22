@@ -16,23 +16,17 @@ export class Sales extends Component {
         this.updateProducts();
         this.updateStores();
         this.updateSales();
-        // prepare the convertedSales ???????????????????????????????????????????????????????????????????
-        //const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        //let current_datetime = new Date()
-        //let formatted_date = current_datetime.getDate() + "-" + months[current_datetime.getMonth()] + "-" + current_datetime.getFullYear()
-        //console.log(formatted_date)
 
-        const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+//convert date--------------
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         const d = new Date("2020-07-18T00:00:00");
-        let formatted_date = d.getDate() + "-" + months[d.getMonth()] + "-" + d.getFullYear()
+        let formatted_date = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear()
         console.log(formatted_date)
 
-        
-        //const dateString = d.toLocaleString();
-        const dateString2 = formatted_date;
-        this.setState({ ...this.state, testDate: dateString2 });
+        this.setState({ ...this.state, testDate: formatted_date });
         console.log("testing");
         console.log(this.state.testDate);
+//convert date^^^^^^^^^^^^^^^^^
     }
 
     newSales = () => {
@@ -61,7 +55,6 @@ export class Sales extends Component {
                 console.log(data);
                 return data;
             });
-
     }
 
     editSales = () => {
@@ -77,6 +70,13 @@ export class Sales extends Component {
                 return res;
             });
     }
+
+    getCustomerById = (customerId) => this.state.customers.find(customer => customer.id === customerId)
+
+    getProductById = (productId) => this.state.products.find(product => product.id === productId)
+
+    getStoreById = (storeId) => this.state.stores.find(store => store.id === storeId)
+
 
     updateCustomers = () => {
         fetch('api/customers', { method: 'GET' })
@@ -94,21 +94,6 @@ export class Sales extends Component {
             });
     }
 
-    updateStores = () => {
-        fetch('api/stores', { method: 'GET' })
-            .then(res => res.json())
-            .then(data => {
-                this.setState({ ...this.state, stores: data });
-                //console.log(data);
-                return data;
-            }).then(data => {
-                console.log(this.state.customers);
-                console.log(this.state.products);
-                console.log(this.state.stores);
-                console.log(this.state.sales);
-                return data;
-            });
-    }
 
     updateProducts = () => {
         fetch('api/products', { method: 'GET' })
@@ -125,6 +110,24 @@ export class Sales extends Component {
                 return data;
             });
     }
+
+
+    updateStores = () => {
+        fetch('api/stores', { method: 'GET' })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({ ...this.state, stores: data });
+                //console.log(data);
+                return data;
+            }).then(data => {
+                console.log(this.state.customers);
+                console.log(this.state.products);
+                console.log(this.state.stores);
+                console.log(this.state.sales);
+                return data;
+            });
+    }
+
 
     updateSales = () => {
         fetch('api/sales', { method: 'GET' })
@@ -157,6 +160,38 @@ export class Sales extends Component {
                 <Button secondary onClick={() => this.editSales()}>
                     Testing edit Sale
                 </Button>
+                <Table celled>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Customer</Table.HeaderCell>
+                            <Table.HeaderCell>Product</Table.HeaderCell>
+                            <Table.HeaderCell>Store</Table.HeaderCell>
+                            <Table.HeaderCell>Date Sold</Table.HeaderCell>
+                            <Table.HeaderCell>Actions</Table.HeaderCell>
+                            <Table.HeaderCell>Actions</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {this.state.sales.map(sale =>
+                            <Table.Row key={sale.id}>
+                                <Table.Cell>{sale.customerId}</Table.Cell>
+                                <Table.Cell>{sale.productId}</Table.Cell>
+                                <Table.Cell>{sale.storeId}</Table.Cell>
+                                <Table.Cell>{sale.dateSold}</Table.Cell>
+                                <Table.Cell>
+                                    <Button color='yellow'>
+                                        <Icon name='edit outline' /> Edit
+                                    </Button>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    <Button color='red'>
+                                        <Icon name='trash' /> Delete
+                                    </Button>
+                                </Table.Cell>
+                            </Table.Row>
+                        )}
+                    </Table.Body>
+                </Table>
                 {/*
                 <NewCustomerModal updateCustomers={this.updateCustomers}/> 
                 <Table celled>

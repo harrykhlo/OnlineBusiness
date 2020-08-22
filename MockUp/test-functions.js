@@ -27,6 +27,9 @@ console.log(sales)
 trial = sales.map((sale) => {return sale.id})
 console.log(trial)
 
-const d = new Date("2020-07-18T00:00:00");
-const dataString = d.toString;
-console.log(d)
+getStoreById = (storeId) => stores.find(store => store.id === storeId)
+console.log(getStoreById(sales[1].storeId).name)
+getProductById = (productId) => products.find(product => product.id === productId)
+console.log(getProductById(sales[1].productId).name)
+getCustomerById = (customerId) => customers.find(customer => customer.id === customerId)
+console.log(getCustomerById(sales[1].customerId).name)
