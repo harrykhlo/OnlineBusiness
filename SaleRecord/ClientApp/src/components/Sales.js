@@ -8,7 +8,7 @@ export class Sales extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { customers: [], products: [], stores: [], sales: [], convertedSales: []};
+        this.state = { customers: [], products: [], stores: [], sales: [], convertedSales: [], testDate: ''};
     }
 
     componentDidMount() {
@@ -17,6 +17,65 @@ export class Sales extends Component {
         this.updateStores();
         this.updateSales();
         // prepare the convertedSales ???????????????????????????????????????????????????????????????????
+        //const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        //let current_datetime = new Date()
+        //let formatted_date = current_datetime.getDate() + "-" + months[current_datetime.getMonth()] + "-" + current_datetime.getFullYear()
+        //console.log(formatted_date)
+
+        const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        const d = new Date("2020-07-18T00:00:00");
+        let formatted_date = d.getDate() + "-" + months[d.getMonth()] + "-" + d.getFullYear()
+        console.log(formatted_date)
+
+        
+        //const dateString = d.toLocaleString();
+        const dateString2 = formatted_date;
+        this.setState({ ...this.state, testDate: dateString2 });
+        console.log("testing");
+        console.log(this.state.testDate);
+    }
+
+    newSales = () => {
+        console.log(this.state.customers[0])
+        //const payload = { productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00", customer: this.state.customers[0], product: this.state.product[0], store: this.state.stores[0]};
+        const payload = { productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00"};
+        console.log(payload);
+        fetch('api/sales', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify(payload)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                return data;
+            });
+    }
+
+    deleteSales = () => {
+        fetch(`api/Sales/1`, {
+            method: 'delete'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                return data;
+            });
+
+    }
+
+    editSales = () => {
+        const payload = { id: 2, productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00" } 
+        //console.log(payload)
+        fetch(`api/Sales/2`, {
+            method: 'PUT',
+            headers: { 'content-type': 'application/json', },
+            body: JSON.stringify(payload)
+        })
+            .then(res => {
+                console.log(res)
+                return res;
+            });
     }
 
     updateCustomers = () => {
@@ -87,6 +146,17 @@ export class Sales extends Component {
         return (
             
             <div>
+                <p>Testing</p>
+                <p>{this.state.testDate}</p>
+                <Button secondary onClick={() => this.newSales()}>
+                    Testing Add New Sale
+                </Button>
+                <Button secondary onClick={() => this.deleteSales()}>
+                    Testing delete Sale
+                </Button>
+                <Button secondary onClick={() => this.editSales()}>
+                    Testing edit Sale
+                </Button>
                 {/*
                 <NewCustomerModal updateCustomers={this.updateCustomers}/> 
                 <Table celled>
