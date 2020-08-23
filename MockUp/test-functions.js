@@ -36,3 +36,4 @@ console.log(getCustomerById(sales[1].customerId).name)
 
 convertedSales = () => sales.map((sale) => {return{productName: getProductById(sale.productId).name, customerName: getCustomerById(sale.customerId).name, storeName: getStoreById(sale.storeId).name, dateSold: sale.dateSold}} )
 console.log(convertedSales())
+console.log(new Date().toLocaleString())
