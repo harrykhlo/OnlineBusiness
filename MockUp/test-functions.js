@@ -33,3 +33,6 @@ getProductById = (productId) => products.find(product => product.id === productI
 console.log(getProductById(sales[1].productId).name)
 getCustomerById = (customerId) => customers.find(customer => customer.id === customerId)
 console.log(getCustomerById(sales[1].customerId).name)
+
+convertedSales = () => sales.map((sale) => {return{productName: getProductById(sale.productId).name, customerName: getCustomerById(sale.customerId).name, storeName: getStoreById(sale.storeId).name, dateSold: sale.dateSold}} )
+console.log(convertedSales())

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Table, Icon } from 'semantic-ui-react'
-import NewCustomerModal from './NewCustomerModal';
+import NewSaleModal from './NewSaleModal';
 import DeleteCustomerModal from './DeleteCustomerModal';
 import EditCustomerModal from './EditCustomerModal';
 
@@ -16,17 +16,27 @@ export class Sales extends Component {
         this.updateProducts();
         this.updateStores();
         this.updateSales();
-
+        this.setState({
+            ...this.state, testDate: this.convertDateFormat("2020-07-18T00:00:00")
+        });
 //convert date--------------
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const d = new Date("2020-07-18T00:00:00");
-        let formatted_date = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear()
-        console.log(formatted_date)
+        
+        //const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        //const d = new Date("2020-07-18T00:00:00");
+        //let formatted_date = d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear()
+        //console.log(formatted_date)
 
-        this.setState({ ...this.state, testDate: formatted_date });
-        console.log("testing");
-        console.log(this.state.testDate);
+        //this.setState({ ...this.state, testDate: formatted_date });
+        //console.log("testing");
+        //console.log(this.state.testDate);
 //convert date^^^^^^^^^^^^^^^^^
+    }
+
+    convertDateFormat = (dateString) => {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const inputDate = new Date(dateString);
+        let formattedDate = inputDate.getDate() + " " + months[inputDate.getMonth()] + " " + inputDate.getFullYear();
+        return formattedDate;
     }
 
     newSales = () => {
@@ -160,6 +170,9 @@ export class Sales extends Component {
                 <Button secondary onClick={() => this.editSales()}>
                     Testing edit Sale
                 </Button>
+
+                <NewSaleModal />
+
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -174,10 +187,10 @@ export class Sales extends Component {
                     <Table.Body>
                         {this.state.sales.map(sale =>
                             <Table.Row key={sale.id}>
-                                <Table.Cell>{sale.customerId}</Table.Cell>
-                                <Table.Cell>{sale.productId}</Table.Cell>
-                                <Table.Cell>{sale.storeId}</Table.Cell>
-                                <Table.Cell>{sale.dateSold}</Table.Cell>
+                                <Table.Cell>{this.getCustomerById(sale.customerId).name}</Table.Cell>
+                                <Table.Cell>{this.getProductById(sale.productId).name}</Table.Cell>
+                                <Table.Cell>{this.getStoreById(sale.storeId).name}</Table.Cell>
+                                <Table.Cell>{this.convertDateFormat(sale.dateSold)}</Table.Cell>
                                 <Table.Cell>
                                     <Button color='yellow'>
                                         <Icon name='edit outline' /> Edit
