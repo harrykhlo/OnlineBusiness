@@ -15,6 +15,54 @@ function NewSaleModal(props) {
         e.target.value = todayDisplayString
     }
 
+    const updateCustomers = () => {
+        fetch('api/customers', { method: 'GET' })
+            .then(res => res.json())
+            .then(data => {
+                setCustomers(data);
+                console.log(data);
+                return data;
+            })
+            .then(data => {
+                console.log("check customers");
+                console.log(customers);
+                return data;
+            });
+    }
+
+
+    //updateProducts = () => {
+    //    fetch('api/products', { method: 'GET' })
+    //        .then(res => res.json())
+    //        .then(data => {
+    //            this.setState({ ...this.state, products: data });
+    //            //console.log(data);
+    //            return data;
+    //        }).then(data => {
+    //            console.log(this.state.customers);
+    //            console.log(this.state.products);
+    //            console.log(this.state.stores);
+    //            console.log(this.state.sales);
+    //            return data;
+    //        });
+    //}
+
+
+    //updateStores = () => {
+    //    fetch('api/stores', { method: 'GET' })
+    //        .then(res => res.json())
+    //        .then(data => {
+    //            this.setState({ ...this.state, stores: data });
+    //            //console.log(data);
+    //            return data;
+    //        }).then(data => {
+    //            console.log(this.state.customers);
+    //            console.log(this.state.products);
+    //            console.log(this.state.stores);
+    //            console.log(this.state.sales);
+    //            return data;
+    //        });
+    //}
 
     const customerOptions = () => customers.map((customer) => ({
         key: customer.id,
@@ -28,9 +76,9 @@ function NewSaleModal(props) {
         <Modal
             closeIcon
             open={open}
-            trigger={<Button primary >New Sale</Button>}
+            trigger={<Button primary >New Customer</Button>}
             onClose={() => setOpen(false)}
-            onOpen={() => { setOpen(true); props.SaleStage.updateAllFunction()}}
+            onOpen={() => { setOpen(true); updateCustomers()}}
             style={{ width: '30%', height: 'auto', top: 'auto', bottom: 'auto', left: 'auto', right: 'auto' }}
         >
             <Header content='Create sales' />

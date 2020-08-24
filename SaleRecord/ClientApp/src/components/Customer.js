@@ -20,7 +20,6 @@ export class Customer extends Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({ customers: data });
-                console.log(data);
                 return data;
             });
     }
