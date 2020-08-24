@@ -16,12 +16,26 @@ function NewSaleModal(props) {
     }
 
 
-    const customerOptions = () => customers.map((customer) => ({
+    const customerOptions = props.SaleStage.customers.map((customer) => ({
         key: customer.id,
         text: customer.name,
         value: customer.id
     }))
 
+    const CustomerDropdownOption = () => (
+        <Dropdown
+            placeholder='Select Customer'
+            fluid
+            search
+            selection
+            options={customerOptions}
+            onChange={onChangeCustomerOptions}
+        />
+    )
+
+    const onChangeCustomerOptions = (event, data) => {
+        console.log(data.value)
+    }
 
     return (
 
@@ -30,7 +44,11 @@ function NewSaleModal(props) {
             open={open}
             trigger={<Button primary >New Sale</Button>}
             onClose={() => setOpen(false)}
-            onOpen={() => { setOpen(true); props.SaleStage.updateAllFunction()}}
+            onOpen={() => {
+                setOpen(true);
+                props.SaleStage.updateAllFunction();
+
+            }}
             style={{ width: '30%', height: 'auto', top: 'auto', bottom: 'auto', left: 'auto', right: 'auto' }}
         >
             <Header content='Create sales' />
@@ -46,17 +64,14 @@ function NewSaleModal(props) {
                         />
                         <p>{customers[0].name}</p>
                     </Form.Field>
-                    {/*
+                    
                     <Form.Field>
-                        <Dropdown
-                            placeholder='Select Customer'
-                            fluid
-                            selection
-                            option={customerOptions}
-                            value = ()
-                        / >
+
+
+                        <CustomerDropdownOption />
+
                     </Form.Field>
-                    */}
+                    
 
 
 
