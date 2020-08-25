@@ -81,64 +81,100 @@ function EditSaleModal(props) {
         </div>
     )
     //const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: "2020-07-25T00:00:00" };
-    const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: dateSoldSQL };
+    const tempEditSale = { id: props.sale.id,  productId: props.sale.productId, customerId: props.sale.customerId, storeId: props.sale.storeId, dateSold: dateSoldSQL };
 
     const onChangeCustomerOptions = (event,  data ) => {
         console.log(data.value);
-        tempNewSale.customerId = data.value;
-        console.log("tempNewSale.customerId")
-        console.log(tempNewSale.customerId);
-        console.log(tempNewSale);
+        tempEditSale.customerId = data.value;
+        console.log("tempEditSale.customerId")
+        console.log(tempEditSale.customerId);
+        console.log(tempEditSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, customerId: data.value })
     }
 
     const onChangeProductOptions = (event, data) => {
         console.log(data.value);
-        tempNewSale.productId = data.value;
-        console.log("tempNewSale.productId")
-        console.log(tempNewSale.productId);
-        console.log(tempNewSale);
+        tempEditSale.productId = data.value;
+        console.log("tempEditSale.productId")
+        console.log(tempEditSale.productId);
+        console.log(tempEditSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, productId: data.value })
     }
 
     const onChangeStoreOptions = (event, data) => {
         console.log(data.value);
-        tempNewSale.storeId = data.value;
-        console.log("tempNewSale.storeId")
-        console.log(tempNewSale.storeId);
-        console.log(tempNewSale);
+        tempEditSale.storeId = data.value;
+        console.log("tempEditSale.storeId")
+        console.log(tempEditSale.storeId);
+        console.log(tempEditSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, storeId: data.value })
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(tempNewSale)
-        const payload = { productId: 1, customerId: 1, storeId: 1, dateSold: "2020-08-25T00:00:00" };
-        //const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: todaySQL };
-        console.log("payload is:");
-        console.log(payload);
-        console.log("tempNewSale is:");
-        console.log(tempNewSale);
-        console.log(JSON.stringify(payload) === JSON.stringify(tempNewSale));
-        console.log(payload.productId === tempNewSale.productId);
-        console.log(payload.customerId === tempNewSale.customerId);
-        console.log(payload.storeId === tempNewSale.storeId);
-        console.log(payload.dateSold === tempNewSale.dateSold);
-        fetch('api/sales', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', },
-            body: JSON.stringify(tempNewSale)
-            //body: JSON.stringify(payload)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setOpen(false)
-                return data;
-            });
+        //const payload = { productId: 1, customerId: 1, storeId: 1, dateSold: "2020-08-25T00:00:00" };
+        //const payload = { id: 2, productId: 1, customerId: 2, storeId: 3, dateSold: "2020-07-18T00:00:00" }
+        //{ id: 2, productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00" } 
+        //const tempEditSale = { productId: 0, customerId: 0, storeId: 0, dateSold: todaySQL };
+        //console.log("tempEditSale is:");
+        //console.log(tempEditSale);
+        //    const payload = { id: 2, productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00" }
+        //console.log(payload)
+        //console.log("tempEditSale is:");
+        //console.log(tempEditSale);
+        //console.log(tempEditSale.id === payload.id)
+        //console.log(tempEditSale.productId === payload.productId)
+        //console.log(tempEditSale.customerId === payload.customerId)
+        //console.log(tempEditSale.storeId === payload.storeId)
+        //console.log(tempEditSale.dateSold === payload.dateSold)
+        fetch(`api/Sales/${tempEditSale.id}`, {
+                method: 'PUT',
+                headers: { 'content-type': 'application/json', },
+                //body: JSON.stringify(payload)
+                body: JSON.stringify(tempEditSale)
+            })
+                .then(res => {
+                    console.log(res)
+
+                    props.SaleStage.updateAllFunction();
+                    setOpen(false)
+
+                    return res;
+                });
+
+        //const submitHandler = (e) => {
+        //    e.preventDefault();
+        //    const payload = { id: customer.id, name, address }
+        //    //console.log(payload)
+        //    fetch(`api/customers/${customer.id}`, {
+        //        method: 'PUT',
+        //        headers: { 'content-type': 'application/json', },
+        //        body: JSON.stringify(payload)
+        //    })
+        //        .then(res => {
+        //            console.log(res)
+        //            updateCustomers();
+        //            setOpen(false);
+        //            return res;
+        //        });
+
+        //editSales = () => {
+        //    const payload = { id: 2, productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00" }
+        //    //console.log(payload)
+        //    fetch(`api/Sales/2`, {
+        //        method: 'PUT',
+        //        headers: { 'content-type': 'application/json', },
+        //        body: JSON.stringify(payload)
+        //    })
+        //        .then(res => {
+        //            console.log(res)
+        //            return res;
+        //        });
+
+
     }
 
     return (
