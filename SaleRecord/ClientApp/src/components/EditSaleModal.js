@@ -5,9 +5,11 @@ function EditSaleModal(props) {
 
     const [open, setOpen] = React.useState(false);
     const [newSale, setNewSale] = React.useState({ productId: 0, customerId: 0, storeId: 0, dateSold: "" });
-    const todayJavaScript = new Date();
-    const todaySQL = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + todayJavaScript.getDate() + "T00:00:00"
-    const todayDisplayString = (todayJavaScript.getMonth() + 1) + "/" + todayJavaScript.getDate() + "/" + todayJavaScript.getFullYear();
+    //const todayJavaScript = new Date(); //for today
+    const dateSoldJavaScript = new Date(props.sale.dateSold);
+    //const todaySQL = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + todayJavaScript.getDate() + "T00:00:00"
+    const dateSoldSQL = props.sale.dateSold;
+    const todayDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
     console.log(todayDisplayString)
 
     //given current date on the modal form and not allow to change
@@ -75,7 +77,7 @@ function EditSaleModal(props) {
         </div>
     )
     //const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: "2020-07-25T00:00:00" };
-    const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: todaySQL };
+    const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: dateSoldSQL };
 
     const onChangeCustomerOptions = (event,  data ) => {
         console.log(data.value);
@@ -140,18 +142,19 @@ function EditSaleModal(props) {
         <Modal
             closeIcon
             open={open}
-            trigger={<Button primary >New Sale</Button>}
+            trigger={<Button color='yellow' > <Icon name='edit outline' /> Edit </Button>}
             onClose={() => setOpen(false)}
             onOpen={() => {
                 setOpen(true);
                 props.SaleStage.updateAllFunction();
-                setNewSale({ ...newSale, dateSold: todaySQL });
+                setNewSale({ ...newSale, dateSold: dateSoldSQL });
 
             }}
             style={{ width: '30%', height: 'auto', top: 'auto', bottom: 'auto', left: 'auto', right: 'auto' }}
         >
-            <Header content='Create sales' />
+            <Header content='Edit sales' />
             <Modal.Content>
+                <p>{props.sale.dateSold}</p>
                 <Form onSubmit={submitHandler}>
                     <Form.Field>
                         <label>Date sold</label>
@@ -173,7 +176,7 @@ function EditSaleModal(props) {
                     </Form.Field>
                     <hr />
                     <Form.Field>
-                        <Button type='submit' floated="right" style={{ margin: '10px' }} color='green' content='create' icon='checkmark' labelPosition='right' />
+                        <Button type='submit' floated="right" style={{ margin: '10px' }} color='green' content='edit' icon='checkmark' labelPosition='right' />
 
                         <Button secondary floated="right" style={{ margin: '10px' }} onClick={() => setOpen(false)}>
                                 cancel

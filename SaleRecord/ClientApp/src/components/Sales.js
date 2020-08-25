@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Table, Icon } from 'semantic-ui-react'
 import NewSaleModal from './NewSaleModal';
 import DeleteCustomerModal from './DeleteCustomerModal';
-import EditCustomerModal from './EditCustomerModal';
+import EditSaleModal from './EditSaleModal';
 
 export class Sales extends Component {
 
@@ -99,9 +99,12 @@ export class Sales extends Component {
                                 <Table.Cell>{this.getStoreNameById(sale.storeId)}</Table.Cell>
                                 <Table.Cell>{this.convertSqlDateToDisplayString(sale.dateSold)}</Table.Cell>
                                 <Table.Cell>
+                                    {/*
                                     <Button color='yellow'>
                                         <Icon name='edit outline' /> Edit
                                     </Button>
+                                    */}
+                                    <EditSaleModal SaleStage={this.state} sale={sale} />
                                 </Table.Cell>
                                 <Table.Cell>
                                     <Button color='red'>
