@@ -1,14 +1,14 @@
 ﻿import React from 'react'
 import { Button, Header, Icon, Modal, Form, Dropdown } from 'semantic-ui-react'
 
-function NewSaleModal(props) {
+function EditSaleModal(props) {
 
     const [open, setOpen] = React.useState(false);
     const [newSale, setNewSale] = React.useState({ productId: 0, customerId: 0, storeId: 0, dateSold: "" });
     const todayJavaScript = new Date();
     const todaySQL = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + todayJavaScript.getDate() + "T00:00:00"
     const todayDisplayString = (todayJavaScript.getMonth() + 1) + "/" + todayJavaScript.getDate() + "/" + todayJavaScript.getFullYear();
-    
+    console.log(todayDisplayString)
 
     //given current date on the modal form and not allow to change
     const changeDateSoldHandler = (e) => {
@@ -129,7 +129,6 @@ function NewSaleModal(props) {
         })
             .then(res => res.json())
             .then(data => {
-                props.SaleStage.updateAllFunction();
                 console.log(data)
                 setOpen(false)
                 return data;
@@ -189,4 +188,4 @@ function NewSaleModal(props) {
 
 }
 
-export default NewSaleModal
+export default EditSaleModal
