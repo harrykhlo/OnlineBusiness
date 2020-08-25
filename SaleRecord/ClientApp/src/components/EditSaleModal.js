@@ -9,12 +9,13 @@ function EditSaleModal(props) {
     const dateSoldJavaScript = new Date(props.sale.dateSold);
     //const todaySQL = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + todayJavaScript.getDate() + "T00:00:00"
     const dateSoldSQL = props.sale.dateSold;
-    const todayDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
-    console.log(todayDisplayString)
+    //const todayDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
+    const dateSoldDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
+
 
     //given current date on the modal form and not allow to change
     const changeDateSoldHandler = (e) => {
-        e.target.value = todayDisplayString
+        e.target.value = dateSoldDisplayString
     }
 
     const customerOptions = props.SaleStage.customers.map((customer) => ({
@@ -43,6 +44,7 @@ function EditSaleModal(props) {
                 fluid
                 search
                 selection
+                defaultValue={props.sale.customerId}
                 options={customerOptions}
                 onChange={onChangeCustomerOptions}
                 />
@@ -57,6 +59,7 @@ function EditSaleModal(props) {
                 fluid
                 search
                 selection
+                defaultValue={props.sale.productId}
                 options={productOptions}
                 onChange={onChangeProductOptions}
             />
@@ -71,6 +74,7 @@ function EditSaleModal(props) {
                 fluid
                 search
                 selection
+                defaultValue={props.sale.storeId}
                 options={storeOptions}
                 onChange={onChangeStoreOptions}
             />
@@ -161,7 +165,7 @@ function EditSaleModal(props) {
                         {/*<input type="text" value={new Date()}/>*/}
                         <input type="text"
                             name="dateSold"
-                            value={todayDisplayString}
+                            value={dateSoldDisplayString}
                             onChange={changeDateSoldHandler}
                         />
                     </Form.Field> 

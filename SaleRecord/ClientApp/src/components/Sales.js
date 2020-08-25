@@ -35,7 +35,6 @@ export class Sales extends Component {
                 stores: promiseArray[2],
                 sales: promiseArray[3]
             });
-            console.log("here is the updateAll in Sales.js")
             return promiseArray;
         })
     }
