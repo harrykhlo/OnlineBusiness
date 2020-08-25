@@ -5,11 +5,8 @@ function EditSaleModal(props) {
 
     const [open, setOpen] = React.useState(false);
     const [newSale, setNewSale] = React.useState({ productId: 0, customerId: 0, storeId: 0, dateSold: "" });
-    //const todayJavaScript = new Date(); //for today
     const dateSoldJavaScript = new Date(props.sale.dateSold);
-    //const todaySQL = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + todayJavaScript.getDate() + "T00:00:00"
     const dateSoldSQL = props.sale.dateSold;
-    //const todayDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
     const dateSoldDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
 
 
@@ -80,101 +77,40 @@ function EditSaleModal(props) {
             />
         </div>
     )
-    //const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: "2020-07-25T00:00:00" };
-    const tempEditSale = { id: props.sale.id,  productId: props.sale.productId, customerId: props.sale.customerId, storeId: props.sale.storeId, dateSold: dateSoldSQL };
+
+    const tempEditSale = { id: props.sale.id, productId: props.sale.productId, customerId: props.sale.customerId, storeId: props.sale.storeId, dateSold: dateSoldSQL };
 
     const onChangeCustomerOptions = (event,  data ) => {
-        console.log(data.value);
         tempEditSale.customerId = data.value;
-        console.log("tempEditSale.customerId")
-        console.log(tempEditSale.customerId);
-        console.log(tempEditSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, customerId: data.value })
     }
 
     const onChangeProductOptions = (event, data) => {
-        console.log(data.value);
         tempEditSale.productId = data.value;
-        console.log("tempEditSale.productId")
-        console.log(tempEditSale.productId);
-        console.log(tempEditSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, productId: data.value })
     }
 
     const onChangeStoreOptions = (event, data) => {
-        console.log(data.value);
         tempEditSale.storeId = data.value;
-        console.log("tempEditSale.storeId")
-        console.log(tempEditSale.storeId);
-        console.log(tempEditSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, storeId: data.value })
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        //const payload = { productId: 1, customerId: 1, storeId: 1, dateSold: "2020-08-25T00:00:00" };
-        //const payload = { id: 2, productId: 1, customerId: 2, storeId: 3, dateSold: "2020-07-18T00:00:00" }
-        //{ id: 2, productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00" } 
-        //const tempEditSale = { productId: 0, customerId: 0, storeId: 0, dateSold: todaySQL };
-        //console.log("tempEditSale is:");
-        //console.log(tempEditSale);
-        //    const payload = { id: 2, productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00" }
-        //console.log(payload)
-        //console.log("tempEditSale is:");
-        //console.log(tempEditSale);
-        //console.log(tempEditSale.id === payload.id)
-        //console.log(tempEditSale.productId === payload.productId)
-        //console.log(tempEditSale.customerId === payload.customerId)
-        //console.log(tempEditSale.storeId === payload.storeId)
-        //console.log(tempEditSale.dateSold === payload.dateSold)
         fetch(`api/Sales/${tempEditSale.id}`, {
                 method: 'PUT',
                 headers: { 'content-type': 'application/json', },
-                //body: JSON.stringify(payload)
                 body: JSON.stringify(tempEditSale)
             })
                 .then(res => {
                     console.log(res)
-
                     props.SaleStage.updateAllFunction();
                     setOpen(false)
-
                     return res;
                 });
-
-        //const submitHandler = (e) => {
-        //    e.preventDefault();
-        //    const payload = { id: customer.id, name, address }
-        //    //console.log(payload)
-        //    fetch(`api/customers/${customer.id}`, {
-        //        method: 'PUT',
-        //        headers: { 'content-type': 'application/json', },
-        //        body: JSON.stringify(payload)
-        //    })
-        //        .then(res => {
-        //            console.log(res)
-        //            updateCustomers();
-        //            setOpen(false);
-        //            return res;
-        //        });
-
-        //editSales = () => {
-        //    const payload = { id: 2, productId: 3, customerId: 1, storeId: 2, dateSold: "2020-07-18T00:00:00" }
-        //    //console.log(payload)
-        //    fetch(`api/Sales/2`, {
-        //        method: 'PUT',
-        //        headers: { 'content-type': 'application/json', },
-        //        body: JSON.stringify(payload)
-        //    })
-        //        .then(res => {
-        //            console.log(res)
-        //            return res;
-        //        });
-
-
     }
 
     return (
