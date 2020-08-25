@@ -69,7 +69,7 @@ function NewProductModal(props) {
                      <Button secondary onClick={() => setOpen(false)}>
                             cancel
                      </Button>
-                    <Button type='submit' color='green' content='create' icon='checkmark' labelPosition='right' />
+                     <Button type='submit' color='green' content='create' icon='checkmark' labelPosition='right' />
                     
                 </Form>
             </Modal.Content>
