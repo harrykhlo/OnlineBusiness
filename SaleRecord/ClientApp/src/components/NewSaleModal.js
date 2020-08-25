@@ -74,70 +74,43 @@ function NewSaleModal(props) {
             />
         </div>
     )
-    //const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: "2020-07-25T00:00:00" };
+ 
     const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: todaySQL };
 
     const onChangeCustomerOptions = (event,  data ) => {
-        console.log(data.value);
         tempNewSale.customerId = data.value;
-        console.log("tempNewSale.customerId")
-        console.log(tempNewSale.customerId);
-        console.log(tempNewSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, customerId: data.value })
     }
 
     const onChangeProductOptions = (event, data) => {
-        console.log(data.value);
         tempNewSale.productId = data.value;
-        console.log("tempNewSale.productId")
-        console.log(tempNewSale.productId);
-        console.log(tempNewSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, productId: data.value })
     }
 
     const onChangeStoreOptions = (event, data) => {
-        console.log(data.value);
         tempNewSale.storeId = data.value;
-        console.log("tempNewSale.storeId")
-        console.log(tempNewSale.storeId);
-        console.log(tempNewSale);
         // problem: the setNewSale() (i.e. state hook) below cannot not be add, otherwise the selected value in the dropdown meun is disappeared
         //setNewSale({ ...newSale, storeId: data.value })
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(tempNewSale)
-        const payload = { productId: 1, customerId: 1, storeId: 1, dateSold: "2020-08-25T00:00:00" };
-        //const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: todaySQL };
-        console.log("payload is:");
-        console.log(payload);
-        console.log("tempNewSale is:");
-        console.log(tempNewSale);
-        console.log(JSON.stringify(payload) === JSON.stringify(tempNewSale));
-        console.log(payload.productId === tempNewSale.productId);
-        console.log(payload.customerId === tempNewSale.customerId);
-        console.log(payload.storeId === tempNewSale.storeId);
-        console.log(payload.dateSold === tempNewSale.dateSold);
         fetch('api/sales', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', },
             body: JSON.stringify(tempNewSale)
-            //body: JSON.stringify(payload)
         })
             .then(res => res.json())
             .then(data => {
                 props.SaleStage.updateAllFunction();
-                console.log(data)
                 setOpen(false)
                 return data;
             });
     }
 
     return (
-
         <Modal
             closeIcon
             open={open}
@@ -147,7 +120,6 @@ function NewSaleModal(props) {
                 setOpen(true);
                 props.SaleStage.updateAllFunction();
                 setNewSale({ ...newSale, dateSold: todaySQL });
-
             }}
             style={{ width: '30%', height: 'auto', top: 'auto', bottom: 'auto', left: 'auto', right: 'auto' }}
         >
@@ -156,7 +128,6 @@ function NewSaleModal(props) {
                 <Form onSubmit={submitHandler}>
                     <Form.Field>
                         <label>Date sold</label>
-                        {/*<input type="text" value={new Date()}/>*/}
                         <input type="text"
                             name="dateSold"
                             value={todayDisplayString}
@@ -186,7 +157,6 @@ function NewSaleModal(props) {
             </Modal.Content>
         </Modal>
         )
-
 }
 
 export default NewSaleModal
