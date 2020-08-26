@@ -19,7 +19,6 @@ function EditCustomerModal(props) {
     const submitHandler = (e) => {
         e.preventDefault();
         const payload = { id: customer.id, name, address }
-        //console.log(payload)
         fetch(`api/customers/${customer.id}`, {
             method: 'PUT',
             headers: { 'content-type': 'application/json', },
@@ -67,10 +66,15 @@ function EditCustomerModal(props) {
                             onChange={changeAddressHandler}
                         />
                     </Form.Field>    
-                     <Button secondary onClick={() => setOpen(false)}>
+                    <hr />
+                    <Form.Field>
+                        <Button type='submit' floated="right" style={{ margin: '10px' }} color='green' content='edit' icon='checkmark' labelPosition='right' />
+                        <Button secondary floated="right" style={{ margin: '10px' }} onClick={() => setOpen(false)}>
                             cancel
-                     </Button>
-                    <Button type='submit' color='green' content='edit' icon='checkmark' labelPosition='right' />
+                        </Button>
+                    <br />
+                    <br />
+                    </Form.Field>
                     
                 </Form>
             </Modal.Content>
