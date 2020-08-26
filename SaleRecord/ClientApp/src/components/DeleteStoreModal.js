@@ -39,11 +39,16 @@ function DeleteStoreModal(props) {
                     <Form.Field>
                         <label>Are you sure?</label>
                     </Form.Field>  
-                     <Button secondary onClick={() => setOpen(false)}>
+                    <hr />
+                    <Form.Field>
+                        <Button type='submit' floated="right" style={{ margin: '10px' }} color='red' content='delete' icon='remove' labelPosition='right' />
+                        <Button secondary floated="right" style={{ margin: '10px' }} onClick={() => setOpen(false)}>
                             cancel
-                     </Button>
-                     <Button type='submit' color='red' content='delete' icon='remove' labelPosition='right' />
-                </Form>
+                        </Button>
+                        <br />
+                        <br />
+                    </Form.Field>
+                     </Form>
             </Modal.Content>
         </Modal>
     )
