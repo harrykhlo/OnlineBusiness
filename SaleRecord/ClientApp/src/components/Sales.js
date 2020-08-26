@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Table, Icon } from 'semantic-ui-react'
 import NewSaleModal from './NewSaleModal';
-import DeleteCustomerModal from './DeleteCustomerModal';
+import DeleteSaleModal from './DeleteSaleModal';
 import EditSaleModal from './EditSaleModal';
 
 export class Sales extends Component {
@@ -106,9 +106,12 @@ export class Sales extends Component {
                                     <EditSaleModal SaleStage={this.state} sale={sale} />
                                 </Table.Cell>
                                 <Table.Cell>
+                                    {/*
                                     <Button color='red'>
                                         <Icon name='trash' /> Delete
                                     </Button>
+                                    */}
+                                    <DeleteSaleModal SaleStage={this.state} sale={sale} />
                                 </Table.Cell>
                             </Table.Row>
                         )}
