@@ -65,11 +65,16 @@ function NewProductModal(props) {
                             placeholder='Price'
                             onChange={changePriceHandler}
                         />
-                    </Form.Field>    
-                     <Button secondary onClick={() => setOpen(false)}>
+                    </Form.Field>   
+                    <hr />
+                    <Form.Field>
+                        <Button type='submit' floated="right" style={{ margin: '10px' }} color='green' content='create' icon='checkmark' labelPosition='right' />
+                        <Button secondary floated="right" style={{ margin: '10px' }} onClick={() => setOpen(false)}>
                             cancel
-                     </Button>
-                     <Button type='submit' color='green' content='create' icon='checkmark' labelPosition='right' />
+                        </Button>
+                    <br />
+                    <br />
+                    </Form.Field>
                     
                 </Form>
             </Modal.Content>

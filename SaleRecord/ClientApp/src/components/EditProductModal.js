@@ -19,7 +19,6 @@ function EditProductModal(props) {
     const submitHandler = (e) => {
         e.preventDefault();
         const payload = { id: product.id, name, price }
-        //console.log(payload)
         fetch(`api/products/${product.id}`, {
             method: 'PUT',
             headers: { 'content-type': 'application/json', },
@@ -66,12 +65,17 @@ function EditProductModal(props) {
                             placeholder='Price'
                             onChange={changePriceHandler}
                         />
-                    </Form.Field>    
-                     <Button secondary onClick={() => setOpen(false)}>
+                    </Form.Field>  
+                    <hr />
+                    <Form.Field>
+                        <Button type='submit' floated="right" style={{ margin: '10px' }} color='green' content='edit' icon='checkmark' labelPosition='right' />
+
+                        <Button secondary floated="right" style={{ margin: '10px' }} onClick={() => setOpen(false)}>
                             cancel
-                     </Button>
-                    <Button type='submit' color='green' content='edit' icon='checkmark' labelPosition='right' />
-                    
+                        </Button>
+                        <br />
+                        <br />
+                    </Form.Field>
                 </Form>
             </Modal.Content>
         </Modal>
