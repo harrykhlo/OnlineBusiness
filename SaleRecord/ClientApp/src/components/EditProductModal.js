@@ -57,7 +57,7 @@ function EditProductModal(props) {
                         />
                     </Form.Field>
                     <Form.Field>
-                        <label>Address</label>
+                        <label>Price</label>
                         <input
                             type="text"
                             name="price"
