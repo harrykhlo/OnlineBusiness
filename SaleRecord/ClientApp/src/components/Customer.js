@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table, Icon } from 'semantic-ui-react'
+import {Table} from 'semantic-ui-react'
 import NewCustomerModal from './NewCustomerModal';
 import DeleteCustomerModal from './DeleteCustomerModal';
 import EditCustomerModal from './EditCustomerModal';
@@ -27,7 +27,9 @@ export class Customer extends Component {
     render() {
         return (
             <div>
+                
                 <NewCustomerModal updateCustomers={this.updateCustomers}/> 
+                
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -43,10 +45,14 @@ export class Customer extends Component {
                                 <Table.Cell>{customer.name}</Table.Cell>
                                 <Table.Cell>{customer.address}</Table.Cell>
                                 <Table.Cell>
+                                    
                                     <EditCustomerModal updateCustomers={this.updateCustomers} customer={customer} />
+                                    
                                 </Table.Cell>
                                 <Table.Cell>
+                                    
                                     <DeleteCustomerModal updateCustomers={this.updateCustomers} customerId={customer.id}/>
+                                    
                                 </Table.Cell>
                             </Table.Row>
                         )}

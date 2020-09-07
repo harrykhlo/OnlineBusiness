@@ -9,13 +9,13 @@ function DeleteStoreModal(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log({ updateStores, storeId})
+        //console.log({ updateStores, storeId})
         fetch(`api/stores/${storeId}`, {
             method: 'delete'
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 updateStores();
                 setOpen(false);
                 return data;

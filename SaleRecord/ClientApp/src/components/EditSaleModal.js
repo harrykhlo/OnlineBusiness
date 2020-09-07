@@ -6,14 +6,10 @@ function EditSaleModal(props) {
     const [open, setOpen] = React.useState(false);
     const [newSale, setNewSale] = React.useState({ productId: 0, customerId: 0, storeId: 0, dateSold: "" });
     const dateSoldJavaScript = new Date(props.sale.dateSold);
-    const dateSoldSQL = props.sale.dateSold;
-    const dateSoldDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
+    //const dateSoldSQL = props.sale.dateSold;
+    //const dateSoldDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
 
-
-    //given current date on the modal form and not allow to change
-    const changeDateSoldHandler = (e) => {
-        e.target.value = dateSoldDisplayString
-    }
+    const dateSoldString = dateSoldJavaScript.getFullYear() + "-" + ("0" + (dateSoldJavaScript.getMonth() + 1)).slice(-2) + "-" + ("0" + dateSoldJavaScript.getDate()).slice(-2)
 
     const customerOptions = props.SaleStage.customers.map((customer) => ({
         key: customer.id,
@@ -78,7 +74,11 @@ function EditSaleModal(props) {
         </div>
     )
 
-    const tempEditSale = { id: props.sale.id, productId: props.sale.productId, customerId: props.sale.customerId, storeId: props.sale.storeId, dateSold: dateSoldSQL };
+    const tempEditSale = { id: props.sale.id, productId: props.sale.productId, customerId: props.sale.customerId, storeId: props.sale.storeId, dateSold: dateSoldString };
+
+    const changeDateSoldHandler = (e) => {
+        tempEditSale.dateSold = e.target.value; 
+    }
 
     const onChangeCustomerOptions = (event,  data ) => {
         tempEditSale.customerId = data.value;
@@ -106,7 +106,6 @@ function EditSaleModal(props) {
                 body: JSON.stringify(tempEditSale)
             })
                 .then(res => {
-                    console.log(res)
                     props.SaleStage.updateAllFunction();
                     setOpen(false)
                     return res;
@@ -123,21 +122,19 @@ function EditSaleModal(props) {
             onOpen={() => {
                 setOpen(true);
                 props.SaleStage.updateAllFunction();
-                setNewSale({ ...newSale, dateSold: dateSoldSQL });
-
+                setNewSale({ ...newSale, dateSold: dateSoldString });
             }}
             style={{ width: '30%', height: 'auto', top: 'auto', bottom: 'auto', left: 'auto', right: 'auto' }}
         >
             <Header content='Edit sales' />
             <Modal.Content>
-                <p>{props.sale.dateSold}</p>
+                
                 <Form onSubmit={submitHandler}>
                     <Form.Field>
                         <label>Date sold</label>
-                        {/*<input type="text" value={new Date()}/>*/}
-                        <input type="text"
+                        <input type="date"
                             name="dateSold"
-                            value={dateSoldDisplayString}
+                            defaultValue={dateSoldString}
                             onChange={changeDateSoldHandler}
                         />
                     </Form.Field> 

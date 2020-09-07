@@ -1,19 +1,15 @@
 ﻿import React from 'react'
-import { Button, Header, Icon, Modal, Form, Dropdown } from 'semantic-ui-react'
+import { Button, Header, Modal, Form, Dropdown } from 'semantic-ui-react'
 
 function NewSaleModal(props) {
 
     const [open, setOpen] = React.useState(false);
     const [newSale, setNewSale] = React.useState({ productId: 0, customerId: 0, storeId: 0, dateSold: "" });
     const todayJavaScript = new Date();
-    const todaySQL = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + todayJavaScript.getDate() + "T00:00:00"
-    const todayDisplayString = (todayJavaScript.getMonth() + 1) + "/" + todayJavaScript.getDate() + "/" + todayJavaScript.getFullYear();
-    
-
-    //given current date on the modal form and not allow to change
-    const changeDateSoldHandler = (e) => {
-        e.target.value = todayDisplayString
-    }
+    //const todaySQL = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + ("0" + todayJavaScript.getDate()).slice(-2) + "T00:00:00"
+    //const todaySQL = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + ("0" + todayJavaScript.getDate()).slice(-2)
+    //const todayDisplayString = (todayJavaScript.getMonth() + 1) + "/" + todayJavaScript.getDate() + "/" + todayJavaScript.getFullYear();
+    const todayString = todayJavaScript.getFullYear() + "-" + ("0" + (todayJavaScript.getMonth() + 1)).slice(-2) + "-" + ("0" + todayJavaScript.getDate()).slice(-2)
 
     const customerOptions = props.SaleStage.customers.map((customer) => ({
         key: customer.id,
@@ -75,7 +71,11 @@ function NewSaleModal(props) {
         </div>
     )
  
-    const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: todaySQL };
+    const tempNewSale = { productId: 0, customerId: 0, storeId: 0, dateSold: todayString };
+
+    const changeDateSoldHandler = (e) => {
+        tempNewSale.dateSold = e.target.value;
+    }
 
     const onChangeCustomerOptions = (event,  data ) => {
         tempNewSale.customerId = data.value;
@@ -119,7 +119,7 @@ function NewSaleModal(props) {
             onOpen={() => {
                 setOpen(true);
                 props.SaleStage.updateAllFunction();
-                setNewSale({ ...newSale, dateSold: todaySQL });
+                setNewSale({ ...newSale, dateSold: todayString });
             }}
             style={{ width: '30%', height: 'auto', top: 'auto', bottom: 'auto', left: 'auto', right: 'auto' }}
         >
@@ -127,10 +127,10 @@ function NewSaleModal(props) {
             <Modal.Content>
                 <Form onSubmit={submitHandler}>
                     <Form.Field>
-                        <label>Date sold</label>
-                        <input type="text"
-                            name="dateSold"
-                            value={todayDisplayString}
+                        <label>Test Date sold</label>
+                        <input type="date"
+                            name="testDateSold"
+                            defaultValue={todayString}
                             onChange={changeDateSoldHandler}
                         />
                     </Form.Field> 

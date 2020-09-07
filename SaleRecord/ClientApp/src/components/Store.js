@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table, Icon } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 import NewStoreModal from './NewStoreModal';
 import DeleteStoreModal from './DeleteStoreModal';
 import EditStoreModal from './EditStoreModal';
@@ -20,7 +20,7 @@ export class Store extends Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({ stores: data });
-                console.log(data);
+                //console.log(data);
                 return data;
             });
     }
@@ -28,7 +28,9 @@ export class Store extends Component {
     render() {
         return (
             <div>
-                <NewStoreModal updateStores={this.updateStores}/> 
+                
+                <NewStoreModal updateStores={this.updateStores}/>
+                
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -44,10 +46,14 @@ export class Store extends Component {
                                 <Table.Cell>{store.name}</Table.Cell>
                                 <Table.Cell>{store.address}</Table.Cell>
                                 <Table.Cell>
+                                    
                                     <EditStoreModal updateStores={this.updateStores} store={store} />
+                                    
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <DeleteStoreModal updateStores={this.updateStores} storeId={store.id}/>
+                                    
+                                    <DeleteStoreModal updateStores={this.updateStores} storeId={store.id} />
+                                    
                                 </Table.Cell>
                             </Table.Row>
                         )}

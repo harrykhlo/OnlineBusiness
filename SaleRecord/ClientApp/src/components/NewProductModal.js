@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react'
+import { Button, Header, Modal, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 function NewProductModal(props) {
@@ -13,16 +13,18 @@ function NewProductModal(props) {
         setProductName(e.target.value)
     }
     const changePriceHandler = (e) => {
-        setPrice(parseFloat(e.target.value))
+        //setPrice(parseFloat(e.target.value))
+        setPrice(e.target.value)
+        //console.log({ name, price: parseFloat(price) })
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log({ name, price})
+        //console.log({ name, price: parseFloat(price)})
         fetch('api/products', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', },
-            body: JSON.stringify({ name, price })
+            body: JSON.stringify({ name, price: parseFloat(price) })
         })
             .then(res => res.json())
             .then(data => {
@@ -59,7 +61,7 @@ function NewProductModal(props) {
                     <Form.Field>
                         <label>Price</label>
                         <input
-                            type="text"
+                            type="number"
                             name="price"  
                             value={price}
                             placeholder='Price'

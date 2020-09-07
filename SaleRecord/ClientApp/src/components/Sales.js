@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table, Icon } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 import NewSaleModal from './NewSaleModal';
 import DeleteSaleModal from './DeleteSaleModal';
 import EditSaleModal from './EditSaleModal';
@@ -78,7 +78,9 @@ export class Sales extends Component {
     render() {
         return (
             <div>
+                
                 <NewSaleModal SaleStage={this.state}/>
+                
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -98,20 +100,14 @@ export class Sales extends Component {
                                 <Table.Cell>{this.getStoreNameById(sale.storeId)}</Table.Cell>
                                 <Table.Cell>{this.convertSqlDateToDisplayString(sale.dateSold)}</Table.Cell>
                                 <Table.Cell>
-                                    {/*
-                                    <Button color='yellow'>
-                                        <Icon name='edit outline' /> Edit
-                                    </Button>
-                                    */}
+                                    
                                     <EditSaleModal SaleStage={this.state} sale={sale} />
+                                    
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {/*
-                                    <Button color='red'>
-                                        <Icon name='trash' /> Delete
-                                    </Button>
-                                    */}
+                                                                       
                                     <DeleteSaleModal SaleStage={this.state} sale={sale} />
+                                    
                                 </Table.Cell>
                             </Table.Row>
                         )}

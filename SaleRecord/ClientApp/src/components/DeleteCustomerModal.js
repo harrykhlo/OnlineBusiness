@@ -9,13 +9,13 @@ function DeleteCustomerModal(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log({ updateCustomers, customerId})
+        //console.log({ updateCustomers, customerId})
         fetch(`api/customers/${customerId}`, {
             method: 'delete'
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 updateCustomers();
                 setOpen(false);
                 return data;

@@ -25,7 +25,7 @@ function EditProductModal(props) {
             body: JSON.stringify(payload)
         })
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 updateProducts();
                 setOpen(false);
                 return res;

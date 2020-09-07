@@ -25,7 +25,7 @@ function EditCustomerModal(props) {
             body: JSON.stringify(payload)
         })
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 updateCustomers();
                 setOpen(false);
                 return res;

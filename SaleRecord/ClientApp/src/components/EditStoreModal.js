@@ -26,7 +26,7 @@ function EditStoreModal(props) {
             body: JSON.stringify(payload)
         })
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 updateStores();
                 setOpen(false);
                 return res;

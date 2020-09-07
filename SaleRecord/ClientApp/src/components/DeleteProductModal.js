@@ -9,13 +9,13 @@ function DeleteProductModal(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log({ updateProducts, productId})
+        //console.log({ updateProducts, productId})
         fetch(`api/products/${productId}`, {
             method: 'delete'
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 updateProducts();
                 setOpen(false);
                 return data;

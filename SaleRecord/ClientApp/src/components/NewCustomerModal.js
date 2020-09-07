@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react'
+import { Button, Header, Modal, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 function NewCustomerModal(props) {
@@ -18,7 +18,7 @@ function NewCustomerModal(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log({ name, address})
+        //console.log({ name, address})
         fetch('api/customers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', },
