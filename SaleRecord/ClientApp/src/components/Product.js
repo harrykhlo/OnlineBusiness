@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'semantic-ui-react'
+import { Button, Table, Icon } from 'semantic-ui-react'
 import NewProductModal from './NewProductModal';
 import DeleteProductModal from './DeleteProductModal';
 import EditProductModal from './EditProductModal';

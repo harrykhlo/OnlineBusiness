@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Modal, Form } from 'semantic-ui-react'
+import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 function NewCustomerModal(props) {

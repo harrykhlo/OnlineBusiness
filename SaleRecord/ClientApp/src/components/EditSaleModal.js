@@ -7,7 +7,7 @@ function EditSaleModal(props) {
     const [newSale, setNewSale] = React.useState({ productId: 0, customerId: 0, storeId: 0, dateSold: "" });
     const dateSoldJavaScript = new Date(props.sale.dateSold);
     //const dateSoldSQL = props.sale.dateSold;
-    //const dateSoldDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
+    const dateSoldDisplayString = (dateSoldJavaScript.getMonth() + 1) + "/" + dateSoldJavaScript.getDate() + "/" + dateSoldJavaScript.getFullYear();
 
     const dateSoldString = dateSoldJavaScript.getFullYear() + "-" + ("0" + (dateSoldJavaScript.getMonth() + 1)).slice(-2) + "-" + ("0" + dateSoldJavaScript.getDate()).slice(-2)
 

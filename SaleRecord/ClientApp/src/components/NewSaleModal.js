@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import { Button, Header, Modal, Form, Dropdown } from 'semantic-ui-react'
+import { Button, Header, Icon, Modal, Form, Dropdown } from 'semantic-ui-react'
 
 function NewSaleModal(props) {
 

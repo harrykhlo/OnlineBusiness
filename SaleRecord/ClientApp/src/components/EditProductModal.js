@@ -13,12 +13,12 @@ function EditProductModal(props) {
         setProductName(e.target.value)
     }
     const changePriceHandler = (e) => {
-        setPrice(parseFloat(e.target.value))
+        setPrice(e.target.value)
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        const payload = { id: product.id, name, price }
+        const payload = { id: product.id, name, price: parseFloat(price) }
         fetch(`api/products/${product.id}`, {
             method: 'PUT',
             headers: { 'content-type': 'application/json', },
@@ -59,7 +59,7 @@ function EditProductModal(props) {
                     <Form.Field>
                         <label>Price</label>
                         <input
-                            type="text"
+                            type="number"
                             name="price"
                             value={price}
                             placeholder='Price'
