@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import { Introduction } from './components/Introduction';
+//import { FetchData } from './components/FetchData';
+//import { Counter } from './components/Counter';
 import { Customer } from './components/Customer';
 import { Product } from './components/Product';
 import { Store } from './components/Store';
@@ -17,7 +17,8 @@ export default class App extends Component {
   render () {
     return (
     <Layout>
-            <Route exact path='/' component={Customer} />
+            <Route exact path='/' component={Introduction} />
+            <Route path='/customer' component={Customer} />
             <Route path='/product' component={Product} />
             <Route path='/store' component={Store} />
             <Route path='/sales' component={Sales} />  
